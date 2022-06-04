@@ -2,7 +2,7 @@ const {readFile} = require('fs')
 
 console.log('Starting new task');
 
-readFile('./context/first.txt', 'utf8', (err, result)=>{
+readFile('./../context/first.txt', 'utf8', (err, result)=>{
     if(err){
         console.log(err)
         return
