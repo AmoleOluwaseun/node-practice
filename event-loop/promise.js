@@ -87,7 +87,7 @@ getText('./context/first.txt')
 
 const {readFile, writeFile} = require('fs').promises
 
-const start = async () => {
+const start = async () => { 
     try {
         const first = await readFile('./context/first.txt', 'utf8');
         const second = await readFile('./context/second.txt', 'utf8');
