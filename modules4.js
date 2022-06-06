@@ -22,7 +22,7 @@ console.log(first, second);
 
 writeFileSync('./context/result.txt', 'Here are a few sentences \n' + first + '\n' + second, {flag:'a'})
  
-//to write and read from files(synchronus)
+//to write and read from files(Asynchronus)
 
 const { readFile, writeFile } = require('fs')
 
@@ -40,7 +40,7 @@ readFile('./context/first.txt','utf8', (err, result) =>{
         }
         const second = result;
 
-        writeFile('./context/result-async.txt', 'utf8', 'Here are a few sentences \n' + first + '\n' + second + '\n', (err, result)=>{
+        writeFile('./context/result-async.txt','Here are a few sentences \n' + first + '\n' + second + '\n', 'utf8', (err, result)=>{
             if(err){
                 console.log(err);
                 return;

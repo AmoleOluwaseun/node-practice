@@ -1,14 +1,25 @@
-const {readFile} = require('fs')
+const { readFile, writeFile } = require('fs')
 
-console.log('Starting new task');
-
-readFile('./context/first.txt', 'utf8', (err, result)=>{
+readFile('./context/first.txt','utf8', (err, result) =>{
     if(err){
-        console.log(err)
-        return
+        console.log(err);
+        return;
     }
-    console.log(result);
-    console.log('completed first task');
-})
+    const first = result;
 
-console.log('Starting next task');
+    readFile('./context/second.txt','utf8', (err, result2) =>{
+        if(err){
+            console.log(err);
+            return;
+        }
+        const second = result;
+
+        writeFile('./context/result-async.txt','Here are a few sentences \n' + first + '\n' + second + '\n', 'utf8', (err, result)=>{
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(result);
+        })
+    })
+})
