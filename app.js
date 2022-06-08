@@ -1,25 +1,17 @@
-const { readFile, writeFile } = require('fs')
+const http = require('http')
+const fs = require('fs')
 
-readFile('./context/first.txt','utf8', (err, result) =>{
-    if(err){
-        console.log(err);
-        return;
-    }
-    const first = result;
+const server = http.createServer(function (req, res){
+    // const text = fs.readFileSync('./context/big.txt', 'utf8')
+    // res.end(text)
 
-    readFile('./context/second.txt','utf8', (err, result2) =>{
-        if(err){
-            console.log(err);
-            return;
-        }
-        const second = result;
-
-        writeFile('./context/result-async.txt','Here are a few sentences \n' + first + '\n' + second + '\n', 'utf8', (err, result)=>{
-            if(err){
-                console.log(err);
-                return;
-            }
-            console.log(result);
-        })
+    const fileStream = fs.createReadStream('./context/big.txt', 'utf8')
+    fileStream.on('open', ()=>{
+        fileStream.pipe(res)
+    })
+    fileStream.on('error',(err)=>{
+        res.end(err)
     })
 })
+
+server.listen(5000)
